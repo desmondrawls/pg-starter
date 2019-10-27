@@ -1,0 +1,14 @@
+node_modules
+.DS_Store
+.git-together
+.paver-environment-*
+.builder-environment-*
+.migrator-environment-*
+.seeder-environment-*
+.env
+.idea
+.vscode
+**/env.json
+yarn-error.log
+**/dist/
+deployment.txt

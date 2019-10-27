@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "typeRoots": [
+      "type-overrides",
+      "node_modules/@types",
+    ],
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "target": "es6",
+    "declaration": true,
+    "downlevelIteration": true,
+    "lib": [
+      "dom",
+      "es2015"
+    ],
+    "noImplicitAny": false,
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "outDir": "dist",
+    "baseUrl": ".",
+    "jsx": "preserve",
+    "paths": {
+      "*": [
+        "node_modules/*",
+        "src/types/*"
+      ]
+    }
+  }
+}

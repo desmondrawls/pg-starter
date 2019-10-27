@@ -1,0 +1,38 @@
+version: '3'
+services:
+  postgres:
+    hostname: postgres
+    build:
+      context: db
+      dockerfile: config/Dockerfile.postgres
+    environment:
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  migrator:
+    build:
+      context: db
+      dockerfile: config/Dockerfile.migrator
+    command: -url=${JDBC_URL} -user=${DATABASE_USER} -password=${DATABASE_PASSWORD} -locations=filesystem:./migrations migrate
+    volumes:
+      - ./db:/host
+    depends_on:
+      - postgres
+
+  seeder:
+    build:
+      context: db
+      dockerfile: config/Dockerfile.seeder
+    environment:
+      DB_URL: ${DATABASE_URL}
+    volumes:
+      - ./db:/host
+    depends_on:
+      - migrator
+
+volumes:
+  pgdata:
+

@@ -1,0 +1,6 @@
+# vim:set ft=dockerfile:
+
+FROM boxfuse/flyway:5.2.4
+
+COPY migrations ./migrations
+

@@ -1,0 +1,35 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build.js",
+    "deploy": "node scripts/deploy.js",
+    "clean-build": "rimraf lib/**/*/build lib/**/*/dist",
+    "prebuild": "npm run clean-build",
+    "test": "npx jest"
+  },
+  "workspaces": {
+    "packages": [
+      "lib/*",
+      "functions/*",
+      "client"
+    ],
+    "nohoist": [
+      "**/*",
+      "**/**/**"
+    ]
+  },
+  "devDependencies": {
+    "execa": "^1.0.0",
+    "rimraf": "^2.6.3"
+  },
+  "dependencies": {
+    "@types/jest": "^24.0.13",
+    "@types/node": "^12.0.2",
+    "global": "^4.4.0",
+    "jest": "23.6.0",
+    "jest-config": "^24.8.0",
+    "pg": "^7.11.0",
+    "ts-jest": "^23.10.5",
+    "typescript": "^3.5.3"
+  }
+}

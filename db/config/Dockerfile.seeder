@@ -1,0 +1,9 @@
+# vim:set ft=dockerfile:
+
+FROM governmentpaas/psql
+
+COPY seeds.sql .
+
+COPY bin/seed.sh .
+
+CMD sh seed.sh
