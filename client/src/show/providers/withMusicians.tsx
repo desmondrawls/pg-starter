@@ -7,6 +7,9 @@ export const MUSICIAN_FRAGMENT = gql`
     id
     name
     instrument
+    bandByBandId {
+      name
+    }
   }
 `
 
@@ -28,11 +31,17 @@ export type Musicians = {
 }
 
 type Instrument = 'trumpet' | 'violin' | 'drums' | 'triangle'
+type Genre = 'rock' | 'rap' | 'jazz' | 'country' | 'pop'
 
+export type Band = {
+  name: string
+  genre: Genre
+}
 export type Musician = {
   id: string
   name: string
   instrument: Instrument
+  bandByBandId: Band
 }
 
 const MusiciansProvider = ({ children }) => (
@@ -41,14 +50,14 @@ const MusiciansProvider = ({ children }) => (
       if (loading || !data || !data.allMusicians) {
         return <div>Loading...</div>
       } else {
-        return children({ Musicians: data.allMusicians.nodes, client })
+        return children({ musicians: data.allMusicians.nodes, client })
       }
     }}
   </Query>
 )
 
-export const withMusicians = (MusiciansComponent: React.FunctionComponent<{Musicians: Musician[]}>) => (
-  <MusiciansProvider>{({ Musicians }) => <MusiciansComponent {...{ Musicians }} />}</MusiciansProvider>
+export const withMusicians = (MusiciansComponent: React.FunctionComponent<{musicians: Musician[]}>) => (
+  <MusiciansProvider>{({ musicians }) => <MusiciansComponent {...{ musicians }} />}</MusiciansProvider>
 )
 
 export default MusiciansProvider
